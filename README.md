@@ -1,7 +1,2 @@
 # CEG4120---Data-Mining-of-Financial-Data
-Data Mining of Financial Data 
-Develop  Windows - compatible  software  to  perform  data  mining  from  the  internet  to collect  current  and  historical  financial  data  of  publicly  traded  companies  with  an emphasis on Defense Contractors (such as Lockheed Martin, Boeing, Raytheon, etc.) and public utilities (such as American Electric Power, NextEra Energy, Atmos Energy Corporation, Duke Energy, etc.) 
-This  requested  software  development  project  has  a  real-world  application.  The  data collected will be used at the Air Force Institute of Technology (AFIT) for graduate level research analyzing the relative profitability of leading Defense Contractors.
-Strong preference to be written in R. The software should compile data output into both a txt file and a Microsoft Excel spreadsheet. Final deliverable needs to include a “user guide” explaining the use and operation of the software with enough detail such that it can be used by graduate level researchers.
-The annual financial data collected should be sortable by company and year. The development team will provide suggestions for the specific format of the output to aid end-user usability.
-Key financial metrics include P/E ratios, EPS, dividend yield, revenue, ROE, ROI, etc., mined from annual Income Statements, Balance Sheets, Cash Flow Statements, etc.. from sources such as Google Finance, Yahoo! Finance, the Wall Street Journal online, etc.
+
