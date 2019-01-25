@@ -1,0 +1,68 @@
+﻿Schedule 
+Week 1 
+        Work on:
+                Research 
+                Learn R
+                Bloomberg DB
+                Python?
+                Data mining research 
+        Finish:
+                Schedule
+Week 2
+        Work on:
+                R testing 
+                Start GUI
+                Connect to DB
+        Finish:
+                Resources (DB)
+Week 3:
+        Work on:
+                Get info from DB
+        Finish:
+                Establish connection 
+Week 4:
+        Work on:
+                Get income/Balance sheet
+Week 5:
+        Work on:
+                Get income/balance sheet 
+        finish :
+                Prototype GUI 
+Week 6:
+        Work on:
+                Get income/balance sheet final
+        Finish:
+                Output income/balance sheet
+Week 7:
+        Work on:
+                Work on formating
+                Testing for demo
+        Finish:
+                Format completed 
+Week 8:
+        Work on:
+                Demo ( Beta )
+                Finish
+        Finish:
+                Beta 
+
+
+Possible milestones:
+* GUI
+* Output to text file
+* Get 1 piece of information from database 
+* Access the database 
+* Format text file 
+* Get all information from a single balance/income sheet
+* Get info from multiple balance/income sheets
+* Get multiple specific pieces of info from both income and balance sheets.
+
+
+Deliverables:
+* Create a unit test 
+* Make use-case scenarios 
+* Project plan 
+* work  breakdown structure 
+* Prototypes 
+* Test plans 
+* User manuals/documentations
