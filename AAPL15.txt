@@ -1,0 +1,66 @@
+X 	Metric 	Units 	Amount 	startDate 	endDate
+1 	1 	Available-for-sale Securities, Noncurrent 	iso4217_USD 	1.30162e+11 	NA 	2014-09-27
+2 	2 	Available-for-sale Securities, Noncurrent 	iso4217_USD 	1.64065e+11 	NA 	2015-09-26
+3 	3 	Property, Plant and Equipment, Net 	iso4217_USD 	2.0624e+10 	NA 	2014-09-27
+4 	4 	Property, Plant and Equipment, Net 	iso4217_USD 	2.2471e+10 	NA 	2015-09-26
+5 	5 	Goodwill 	iso4217_USD 	4.616e+09 	NA 	2014-09-27
+6 	6 	Goodwill 	iso4217_USD 	5.116e+09 	NA 	2015-09-26
+7 	7 	Intangible Assets, Net (Excluding Goodwill) 	iso4217_USD 	4.142e+09 	NA 	2014-09-27
+8 	8 	Intangible Assets, Net (Excluding Goodwill) 	iso4217_USD 	3.893e+09 	NA 	2015-09-26
+9 	9 	Other Assets, Noncurrent 	iso4217_USD 	3.764e+09 	NA 	2014-09-27
+10 	10 	Other Assets, Noncurrent 	iso4217_USD 	5.556e+09 	NA 	2015-09-26
+11 	11 	Assets 	iso4217_USD 	2.31839e+11 	NA 	2014-09-27
+12 	12 	Assets 	iso4217_USD 	2.90479e+11 	NA 	2015-09-26
+13 	13 	Cash and Cash Equivalents, at Carrying Value 	iso4217_USD 	1.0746e+10 	NA 	2012-09-29
+14 	14 	Cash and Cash Equivalents, at Carrying Value 	iso4217_USD 	1.4259e+10 	NA 	2013-09-28
+15 	15 	Cash and Cash Equivalents, at Carrying Value 	iso4217_USD 	1.3844e+10 	NA 	2014-09-27
+16 	16 	Cash and Cash Equivalents, at Carrying Value 	iso4217_USD 	2.112e+10 	NA 	2015-09-26
+17 	17 	Available-for-sale Securities, Current 	iso4217_USD 	1.1233e+10 	NA 	2014-09-27
+18 	18 	Available-for-sale Securities, Current 	iso4217_USD 	2.0481e+10 	NA 	2015-09-26
+19 	19 	Accounts Receivable, Net, Current 	iso4217_USD 	1.746e+10 	NA 	2014-09-27
+20 	20 	Accounts Receivable, Net, Current 	iso4217_USD 	1.6849e+10 	NA 	2015-09-26
+21 	21 	Inventory, Net 	iso4217_USD 	2.111e+09 	NA 	2014-09-27
+22 	22 	Inventory, Net 	iso4217_USD 	2.349e+09 	NA 	2015-09-26
+23 	23 	Deferred Tax Assets, Net, Current 	iso4217_USD 	4.318e+09 	NA 	2014-09-27
+24 	24 	Deferred Tax Assets, Net, Current 	iso4217_USD 	5.546e+09 	NA 	2015-09-26
+25 	25 	Nontrade Receivables, Current 	iso4217_USD 	9.759e+09 	NA 	2014-09-27
+26 	26 	Nontrade Receivables, Current 	iso4217_USD 	1.3494e+10 	NA 	2015-09-26
+27 	27 	Other Assets, Current 	iso4217_USD 	9.806e+09 	NA 	2014-09-27
+28 	28 	Other Assets, Current 	iso4217_USD 	9.539e+09 	NA 	2015-09-26
+29 	29 	Assets, Current 	iso4217_USD 	6.8531e+10 	NA 	2014-09-27
+30 	30 	Assets, Current 	iso4217_USD 	8.9378e+10 	NA 	2015-09-26
+31 	31 	Deferred Revenue, Noncurrent 	iso4217_USD 	3.031e+09 	NA 	2014-09-27
+32 	32 	Deferred Revenue, Noncurrent 	iso4217_USD 	3.624e+09 	NA 	2015-09-26
+33 	33 	Long-term Debt, Excluding Current Maturities 	iso4217_USD 	2.8987e+10 	NA 	2014-09-27
+34 	34 	Long-term Debt, Excluding Current Maturities 	iso4217_USD 	5.3463e+10 	NA 	2015-09-26
+35 	35 	Other Liabilities, Noncurrent 	iso4217_USD 	2.4826e+10 	NA 	2014-09-27
+36 	36 	Other Liabilities, Noncurrent 	iso4217_USD 	3.3427e+10 	NA 	2015-09-26
+37 	37 	Liabilities 	iso4217_USD 	1.20292e+11 	NA 	2014-09-27
+38 	38 	Liabilities 	iso4217_USD 	1.71124e+11 	NA 	2015-09-26
+39 	39 	Commitments and Contingencies 	iso4217_USD 	NA 	NA 	2014-09-27
+40 	40 	Commitments and Contingencies 	iso4217_USD 	NA 	NA 	2015-09-26
+41 	41 	Liabilities and Equity 	iso4217_USD 	2.31839e+11 	NA 	2014-09-27
+42 	42 	Liabilities and Equity 	iso4217_USD 	2.90479e+11 	NA 	2015-09-26
+43 	43 	Accounts Payable, Current 	iso4217_USD 	3.0196e+10 	NA 	2014-09-27
+44 	44 	Accounts Payable, Current 	iso4217_USD 	3.549e+10 	NA 	2015-09-26
+45 	45 	Accrued Liabilities, Current 	iso4217_USD 	1.8453e+10 	NA 	2014-09-27
+46 	46 	Accrued Liabilities, Current 	iso4217_USD 	2.5181e+10 	NA 	2015-09-26
+47 	47 	Deferred Revenue, Current 	iso4217_USD 	8.491e+09 	NA 	2014-09-27
+48 	48 	Deferred Revenue, Current 	iso4217_USD 	8.94e+09 	NA 	2015-09-26
+49 	49 	Commercial Paper 	iso4217_USD 	6.308e+09 	NA 	2014-09-27
+50 	50 	Commercial Paper 	iso4217_USD 	8.499e+09 	NA 	2015-09-26
+51 	51 	Long-term Debt, Current Maturities 	iso4217_USD 	0 	NA 	2014-09-27
+52 	52 	Long-term Debt, Current Maturities 	iso4217_USD 	2.5e+09 	NA 	2015-09-26
+53 	53 	Liabilities, Current 	iso4217_USD 	6.3448e+10 	NA 	2014-09-27
+54 	54 	Liabilities, Current 	iso4217_USD 	8.061e+10 	NA 	2015-09-26
+55 	55 	Common Stocks, Including Additional Paid in Capital 	iso4217_USD 	2.3313e+10 	NA 	2014-09-27
+56 	56 	Common Stocks, Including Additional Paid in Capital 	iso4217_USD 	2.7416e+10 	NA 	2015-09-26
+57 	57 	Retained Earnings (Accumulated Deficit) 	iso4217_USD 	8.7152e+10 	NA 	2014-09-27
+58 	58 	Retained Earnings (Accumulated Deficit) 	iso4217_USD 	9.2284e+10 	NA 	2015-09-26
+59 	59 	Accumulated Other Comprehensive Income (Loss), Net of Tax 	iso4217_USD 	-4.71e+08 	NA 	2013-09-28
+60 	60 	Accumulated Other Comprehensive Income (Loss), Net of Tax 	iso4217_USD 	1.082e+09 	NA 	2014-09-27
+61 	61 	Accumulated Other Comprehensive Income (Loss), Net of Tax 	iso4217_USD 	-3.45e+08 	NA 	2015-09-26
+62 	62 	Stockholders' Equity Attributable to Parent 	iso4217_USD 	1.1821e+11 	NA 	2012-09-29
+63 	63 	Stockholders' Equity Attributable to Parent 	iso4217_USD 	1.23549e+11 	NA 	2013-09-28
+64 	64 	Stockholders' Equity Attributable to Parent 	iso4217_USD 	1.11547e+11 	NA 	2014-09-27
+65 	65 	Stockholders' Equity Attributable to Parent 	iso4217_USD 	1.19355e+11 	NA 	2015-09-26
