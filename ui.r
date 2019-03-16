@@ -1,6 +1,7 @@
 library(shiny)
 library(finreportr)
 
+#UI
 shinyUI(fluidPage(titlePanel(h1(
   "Income/Balance sheets finder"
 )),
