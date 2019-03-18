@@ -30,9 +30,9 @@ sidebarLayout(
   mainPanel(
     
     ("Docs are viewed here!"),
-    textOutput("searchOutput"),
-    textOutput("sheetTypeOutput"),
-    textOutput("datePickedOutput"),
+    htmlOutput("searchOutput"),
+    htmlOutput("sheetTypeOutput"),
+    htmlOutput("datePickedOutput"),
     
     #outputs the .csv file
     tableOutput("filetable")

@@ -1,15 +1,32 @@
 library(shiny)
 
 shinyServer(
-  function(input,output){
+  function(input,output,session){
     
     #outputs
-    output$searchOutput <- renderText(input$searchInput)
+    observeEvent(input$searchBtn, {
+      output$searchOutput <- renderUI({
+        str1 <- "Company Searched:"
+        str2 <- isolate(input$searchInput)
+        HTML(paste(str1, str2, sep = ' '))
+      })
+    })
     
-    output$sheetTypeOutput <- renderText(input$sheetTypeBtn)
+    observeEvent(input$searchBtn, {
+      output$sheetTypeOutput <- renderUI({
+        str1 <- "Form Selected:"
+        str2 <- isolate(input$sheetTypeBtn)
+        HTML(paste(str1, str2, sep=' '))
+      })
+    })
     
-    output$datePickedOutput <- renderText(input$datePicker)
-    
+    observeEvent(input$searchBtn, {
+      output$datePickedOutput <- renderUI({
+        str1 <- "Year Selected:"
+        str2 <- isolate(input$datePicker)
+        HTML(paste(str1, str2, sep=' '))
+      })
+    })
     
     #RadioButton Selector for Balance or Income
     
