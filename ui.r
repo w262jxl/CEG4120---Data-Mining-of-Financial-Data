@@ -20,7 +20,8 @@ sidebarLayout(
     
     
   #options for chossing the type of the sheet
-    radioButtons("sheetTypeBtn", "Choose the type of sheet:", list("Balance", "Income", "Cash Flow Statement"),""),
+    radioButtons("sheetTypeBtn", "Choose the type of sheet:", list("Balance Sheet", "Income Statement", "Cash Flow"),
+                 selected = "Balance Sheet"),
     
   #slider to choose the date looking for
     sliderInput("datePicker","Select the date Desired: ",min = 2009,max = 2019,value = "")),
@@ -29,6 +30,7 @@ sidebarLayout(
   mainPanel(
     
     ("Docs are viewed here!"),
+    textOutput("searchOutput"),
     
     #outputs the .csv file
     tableOutput("filetable")
