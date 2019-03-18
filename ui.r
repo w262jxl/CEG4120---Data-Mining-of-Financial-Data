@@ -31,6 +31,8 @@ sidebarLayout(
     
     ("Docs are viewed here!"),
     textOutput("searchOutput"),
+    textOutput("sheetTypeOutput"),
+    textOutput("datePickedOutput"),
     
     #outputs the .csv file
     tableOutput("filetable")
