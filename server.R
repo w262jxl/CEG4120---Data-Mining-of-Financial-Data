@@ -25,6 +25,25 @@ shinyServer(
         str <- isolate(CompanyInfo(input$searchInput))
         HTML(paste(str, sep=''))
       })
+      
+      output$compForm <- renderUI({
+        if(input$sheetTypeBtn == "Balance Sheet"){
+          #companyFile <- GetBalanceSheet(input$searchInput, input$datePicker)
+          str <- "BS"
+       }
+        else if(input$sheetTypeBtn == "Income Statement"){
+          #companyFile <- GetIncome(input$searchInput, input$datePicker)
+          str <- "IS"
+        }
+        else{
+          #companyFile <- GetCashFlow(input$searchInput, input$datePicker)
+          str <- "CF"
+        }
+        filename <- paste(input$searchInput, str, input$datePicker, ".CSV", sep='')
+        #write.csv(companyFile, filename)
+        
+        HTML(filename)
+      })
     })
     
     #RadioButton Selector for Balance or Income
@@ -49,6 +68,10 @@ shinyServer(
         str <- ""
         HTML(paste(str, sep=''))
       })
+      output$compInfo <- renderUI({
+        str <- ""
+        HTML(paste(str, sep=''))
+      })
       read.csv(infile$datapath)
     })
     
@@ -57,7 +80,8 @@ shinyServer(
       filedata()
     })
     
-  }
-  
+    }
   
 )
+    
+    
