@@ -10,17 +10,11 @@ shinyServer(
         str2 <- isolate(input$searchInput)
         HTML(paste(str1, str2, sep = ' '))
       })
-    })
-    
-    observeEvent(input$searchBtn, {
       output$sheetTypeOutput <- renderUI({
         str1 <- "Form Selected:"
         str2 <- isolate(input$sheetTypeBtn)
         HTML(paste(str1, str2, sep=' '))
       })
-    })
-    
-    observeEvent(input$searchBtn, {
       output$datePickedOutput <- renderUI({
         str1 <- "Year Selected:"
         str2 <- isolate(input$datePicker)
@@ -37,6 +31,19 @@ shinyServer(
         # User has not uploaded a file yet
         return(NULL)
       }
+      
+      output$searchOutput <- renderUI({
+        str <- ""
+        HTML(paste(str, sep=''))
+      })
+      output$sheetTypeOutput <- renderUI({
+        str <- ""
+        HTML(paste(str, sep=''))
+      })
+      output$datePickedOutput <- renderUI({
+        str <- ""
+        HTML(paste(str, sep=''))
+      })
       read.csv(infile$datapath)
     })
     
