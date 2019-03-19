@@ -1,4 +1,5 @@
 library(shiny)
+library(finreportr)
 
 shinyServer(
   function(input,output,session){
@@ -19,6 +20,10 @@ shinyServer(
         str1 <- "Year Selected:"
         str2 <- isolate(input$datePicker)
         HTML(paste(str1, str2, sep=' '))
+      })
+      output$compInfo <- renderUI({
+        str <- isolate(CompanyInfo(input$searchInput))
+        HTML(paste(str, sep=''))
       })
     })
     
