@@ -8,7 +8,7 @@ shinyServer(
     observeEvent(input$searchBtn, {
       output$searchOutput <- renderUI({
         str1 <- "Company Searched:"
-        str2 <- isolate(input$searchInput)
+        str2 <- isolate(toupper(input$searchInput))
         HTML(paste(str1, str2, sep = ' '))
       })
       
@@ -30,69 +30,69 @@ shinyServer(
       })
       
       outputFileName <- reactive({
+        isolatedSearchInput <- isolate(input$searchInput)
+        isolatedSheetType <- isolate(input$sheetTypeBtn)
+        isolatedDate <- isolate(input$datePicker)
+        
         output$fileNameOutput <- renderUI({
-          if(input$sheetTypeBtn == "Balance Sheet"){
+          if(isolatedSheetType == "Balance Sheet"){
             str <- "BS"
           }
-          else if(input$sheetTypeBtn == "Income Statement"){
+          else if(isolatedSheetType == "Income Statement"){
             str <- "IS"
           }
           else{
             str <- "CF"
           }
-          userInput <- toupper(input$searchInput)
-          fileName <- paste(userInput, str, input$datePicker, sep = '_')
-          fullFileName <- paste(fileName, ".CSV", sep = '')
-          HTML(paste("The file is saved as ", fullFileName, sep = ''))
-        })
-      })
-      
-      displayWarning <- reactive({
-        output$warningDisplay <- renderUI({
-          HTML("The specified document could not be found")
+          userInput <- toupper(isolatedSearchInput)
+          fileName <- paste(userInput, str, isolatedDate, sep = '_')
+          fullFileName <- isolate(paste(fileName, ".CSV", sep = ''))
+          HTML(paste("The file is saved as ", fullFileName, " in the ", userInput, " folder.", sep = ''))
         })
       })
       
       output$compForm <- renderTable({
-        if(input$searchInput == "Balance Sheet"){
+        isolatedSearchInput <- isolate(input$searchInput)
+        isolatedSheetType <- isolate(input$sheetTypeBtn)
+        isolatedDate <- isolate(input$datePicker)
+        
+        if(isolatedSheetType == "Balance Sheet"){
           str <- "BS"
         }
-        else if(input$sheetTypeBtn == "Income Statement"){
+        else if(isolatedSheetType == "Income Statement"){
           str <- "IS"
         }
         else{
           str <- "CF"
         }
         
-        userInput <- toupper(input$searchInput)
-        fileName <- paste(userInput, str, input$datePicker, sep = '_')
-        fullFileName <- paste(fileName, ".CSV", sep = '')
-        if(file.exists(fileName)){
+        userInput <- toupper(isolatedSearchInput)
+        fileName <- paste(userInput, str, isolatedDate, sep = '_')
+        fullFileName <- paste(userInput, "/", fileName, ".CSV", sep = '')
+        
+        subDir <- userInput
+        
+        if(file.exists(fullFileName)){
           outputFileName()
-          read.csv(file = fileName)
+          read.csv(file = fullFileName)
         }
         else{
-          #result <- tryCatch({
-            if(input$sheetTypeBtn == "Balance Sheet"){
-              companyFile <- GetBalanceSheet(input$searchInput, input$datePicker)
-              if(is.null(companyFile)){
-                displayWarning()
-              }
-            }
-            else if(input$sheetTypeBtn == "Income Statement"){
-              companyFile <- GetIncome(input$searchInput, input$datePicker)
-            }
-            else{
-              companyFile <- GetCashFlow(input$searchInput, input$datePicker)
-            }
+          if(isolatedSheetType == "Balance Sheet"){
+            companyFile <- GetBalanceSheet(isolatedSearchInput, isolatedDate)
+          }
+          else if(isolatedSheetType == "Income Statement"){
+            companyFile <- GetIncome(isolatedSearchInput, isolatedDate)
+          }
+          else{
+            companyFile <- GetCashFlow(isolatedSearchInput, isolatedDate)
+          }
             
-            write.csv(companyFile, fileName)
-            outputFileName()
-            read.csv(file = fileName)
-          #}, warning = function(war) {
-          #  displayWarning()
-          #}
-          #)
+          if(!file.exists(subDir)){
+            dir.create(subDir)
+          }
+          write.csv(companyFile, fullFileName)
+          outputFileName()
+          read.csv(file = fullFileName)
         }
       })
     })
@@ -120,6 +120,10 @@ shinyServer(
         HTML(paste(str, sep=''))
       })
       output$compInfo <- renderUI({
+        str <- ""
+        HTML(paste(str, sep=''))
+      })
+      output$fileNameOutput <- renderUI({
         str <- ""
         HTML(paste(str, sep=''))
       })
