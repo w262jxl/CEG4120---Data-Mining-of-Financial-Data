@@ -34,7 +34,9 @@ sidebarLayout(
     htmlOutput("sheetTypeOutput"),
     htmlOutput("datePickedOutput"),
     htmlOutput("compInfo"),
-    htmlOutput("compForm"),
+    htmlOutput("fileNameOutput"),
+    htmlOutput("warningDisplay"),
+    tableOutput("compForm"),
     
     #outputs the .csv file
     tableOutput("filetable")
