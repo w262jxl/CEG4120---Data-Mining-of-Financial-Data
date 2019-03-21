@@ -86,7 +86,7 @@ shinyServer(
           else{
             companyFile <- GetCashFlow(isolatedSearchInput, isolatedDate)
           }
-            
+          
           if(!file.exists(subDir)){
             dir.create(subDir)
           }
@@ -136,8 +136,10 @@ shinyServer(
       filedata()
     })
     
-    }
+  }
   
 )
+  
+
     
     
