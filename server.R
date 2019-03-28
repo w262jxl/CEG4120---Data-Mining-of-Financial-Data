@@ -1,5 +1,23 @@
+if (!require("shiny")){
+  install.packages("shiny")
+}
+
+if(!require("finreportr")){
+  install.packages("finreportr")
+}
+
+if(!require("openxlsx")){
+  install.packages("openxlsx")
+}
+
+if(!require("tools")){
+  install.packages("tools")
+}
+
 library(shiny)
 library(finreportr)
+library(openxlsx)
+library(tools)
 
 shinyServer(
   function(input,output,session){
@@ -92,6 +110,7 @@ shinyServer(
           }
           write.csv(companyFile, fullFileName)
           outputFileName()
+          write.xlsx(read.csv(fullFileName), "test.xlsx")
           read.csv(file = fullFileName)
         }
       })
@@ -128,7 +147,15 @@ shinyServer(
         HTML(paste(str, sep=''))
       })
       
-      read.csv(infile$datapath)
+      extension <- file_ext(infile$datapath)
+      
+      if(extension == "CSV"){
+        read.csv(infile$datapath)
+      }
+      else if(extension == "xlsx"){
+        read.xlsx(infile$datapath)
+      }
+      # Else read txt
     })
     
     #This previews the CSV data file

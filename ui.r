@@ -1,3 +1,11 @@
+if (!require("shiny")){
+  install.packages("shiny")
+}
+
+if(!require("finreportr")){
+  install.packages("finreportr")
+}
+
 library(shiny)
 library(finreportr)
 
