@@ -24,8 +24,12 @@ sidebarLayout(
     radioButtons("sheetTypeBtn", "Choose the type of sheet:", list("Balance Sheet", "Income Statement", "Cash Flow"),
                  selected = "Balance Sheet"),
     
-    #slider to choose the date looking for
-    sliderInput("datePicker","Select the date Desired: ",min = 2009,max = 2019,value = ""),
+    #Year selection
+    selectInput(
+      inputId =  "datePicker", 
+      label = "Select year:", 
+      choices = 2009:as.numeric(format(Sys.Date(),"%Y"))
+    ),
     
     actionButton("searchBtn", "Search"),
     
