@@ -20,9 +20,9 @@ sidebarLayout(
     #This is the search area for inputting the name of the company 
     textInput("searchInput", "Enter Name of company (StockSymbol)",   ""),
     
-    #options for chossing the type of the sheet
-    radioButtons("sheetTypeBtn", "Choose the type of sheet:", list("Balance Sheet", "Income Statement", "Cash Flow"),
-                 selected = "Balance Sheet"),
+    #options for choosing the type of the sheet
+    checkboxGroupInput("checkboxGroup", "Choose the type of sheet:", choiceNames = list("Balance Sheet", "Income Statement", "Cash Flow") ,choiceValues = list("Balance Sheet", "Income Statement",
+                  "Cash Flow")),
     
     #Year selection
     selectInput(

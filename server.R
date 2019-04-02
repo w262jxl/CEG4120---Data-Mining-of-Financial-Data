@@ -31,8 +31,8 @@ shinyServer(
       })
       
       output$sheetTypeOutput <- renderUI({
-        str1 <- "Form Selected:"
-        str2 <- isolate(input$sheetTypeBtn)
+        str1 <- "Form(s) Selected:"
+        str2 <- isolate(input$checkboxGroup)
         HTML(paste(str1, str2, sep=' '))
       })
       
@@ -49,7 +49,7 @@ shinyServer(
       
       outputFileName <- reactive({
         isolatedSearchInput <- isolate(input$searchInput)
-        isolatedSheetType <- isolate(input$sheetTypeBtn)
+        isolatedSheetType <- isolate(input$checkboxGroup)
         isolatedDate <- isolate(input$datePicker)
         
         output$fileNameOutput <- renderUI({
@@ -65,15 +65,16 @@ shinyServer(
           userInput <- toupper(isolatedSearchInput)
           fileName <- paste(userInput, str, isolatedDate, sep = '_')
           fullFileName <- isolate(paste(fileName, ".CSV", sep = ''))
-          HTML(paste("The file is saved as ", fullFileName, " in the ", userInput, " folder.", sep = ''))
+          HTML(paste("The files are saved in the ", userInput, " folder.", sep = ''))
         })
       })
       
-      output$compForm <- renderTable({
-        isolatedSearchInput <- isolate(input$searchInput)
-        isolatedSheetType <- isolate(input$sheetTypeBtn)
-        isolatedDate <- isolate(input$datePicker)
-        
+      getFileInfo <- function(form, year, company) {
+        fileInfo <- c(form, year, company)
+        return(fileInfo)
+      }
+      
+      downloadFile <- function(isolatedSheetType, isolatedDate, isolatedSearchInput) {
         if(isolatedSheetType == "Balance Sheet"){
           str <- "BS"
         }
@@ -92,7 +93,7 @@ shinyServer(
         
         if(file.exists(fullFileName)){
           outputFileName()
-          read.csv(file = fullFileName)
+          return(fullFileName)
         }
         else{
           if(isolatedSheetType == "Balance Sheet"){
@@ -111,8 +112,72 @@ shinyServer(
           write.csv(companyFile, fullFileName)
           outputFileName()
           write.xlsx(read.csv(fullFileName), "test.xlsx")
-          read.csv(file = fullFileName)
+          return(fullFileName)
         }
+      }
+      
+      output$compForm <- renderTable({
+        isolatedSearchInput <- isolate(input$searchInput)
+        isolatedSheetType <- isolate(input$checkboxGroup)
+        isolatedDate <- isolate(input$datePicker)
+        
+        filesToDownload <- c()
+        fileCount <- 0
+        
+        if(is.null(isolatedSheetType[1]) == TRUE){
+          print("No sheet selected")
+        }
+        else if(is.na(isolatedSheetType[2]) == TRUE){
+          selectedSheet1 <- isolatedSheetType[1]
+          
+          newFile <- getFileInfo(selectedSheet1, isolatedDate, isolatedSearchInput)
+          filesToDownload <- c(filesToDownload, newFile)
+          fileCount <- fileCount + 1
+        }
+        else if(is.na(isolatedSheetType[3]) == TRUE){
+          selectedSheet1 <- isolatedSheetType[1]
+          selectedSheet2 <- isolatedSheetType[2]
+          
+          newFile <- getFileInfo(selectedSheet1, isolatedDate, isolatedSearchInput)
+          filesToDownload <- c(filesToDownload, newFile)
+          fileCount <- fileCount + 1
+          newFile <- getFileInfo(selectedSheet2, isolatedDate, isolatedSearchInput)
+          filesToDownload <- c(filesToDownload, newFile)
+          fileCount <- fileCount + 1
+        }
+        else{
+          selectedSheet1 <- isolatedSheetType[1]
+          selectedSheet2 <- isolatedSheetType[2]
+          selectedSheet3 <- isolatedSheetType[3]
+          
+          newFile <- getFileInfo(selectedSheet1, isolatedDate, isolatedSearchInput)
+          filesToDownload <- c(filesToDownload, newFile)
+          fileCount <- fileCount + 1
+          newFile <- getFileInfo(selectedSheet2, isolatedDate, isolatedSearchInput)
+          filesToDownload <- c(filesToDownload, newFile)
+          fileCount <- fileCount + 1
+          newFile <- getFileInfo(selectedSheet3, isolatedDate, isolatedSearchInput)
+          filesToDownload <- c(filesToDownload, newFile)
+          fileCount <- fileCount + 1
+        }
+        
+        for (i in 1:fileCount) {
+          x <- (i - 1) * 3 + 1
+          print(x)
+          isolatedSheetType <- filesToDownload[c(x)]
+          x <- x + 1
+          isolatedDate <- filesToDownload[c(x)]
+          x <- x + 1
+          isolatedSearchInput <- filesToDownload[c(x)]
+          print(isolatedSheetType)
+          print(isolatedDate)
+          print(isolatedSearchInput)
+          csvFile <- downloadFile(isolatedSheetType, isolatedDate, isolatedSearchInput)
+          next
+        }
+        
+        read.csv(csvFile)
+        #downloadFile(isolatedSheetType, isolatedDate, isolatedSearchInput)
       })
     })
     
