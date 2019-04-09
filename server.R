@@ -120,45 +120,74 @@ shinyServer(
         isolatedSearchInput <- isolate(input$searchInput)
         isolatedSheetType <- isolate(input$checkboxGroup)
         isolatedDate <- isolate(input$datePicker)
+        isolatedDate2 <- isolate(input$datePicker2)
+        year <- as.numeric(isolatedDate)
         
         filesToDownload <- c()
         fileCount <- 0
+        yearCount <- 1
+        
+        while(year != isolatedDate2){
+          yearCount <- yearCount + 1
+          year <- year + 1
+        }
         
         if(is.null(isolatedSheetType[1]) == TRUE){
-          print("No sheet selected")
+          print("No sheet type selected")
         }
         else if(is.na(isolatedSheetType[2]) == TRUE){
           selectedSheet1 <- isolatedSheetType[1]
+          yearPlaceholder <- isolatedDate
           
-          newFile <- getFileInfo(selectedSheet1, isolatedDate, isolatedSearchInput)
-          filesToDownload <- c(filesToDownload, newFile)
-          fileCount <- fileCount + 1
+          for(i in 1: yearCount) {
+            newFile <- getFileInfo(selectedSheet1, yearPlaceholder, isolatedSearchInput)
+            filesToDownload <- c(filesToDownload, newFile)
+            fileCount <- fileCount + 1
+            yearPlaceholder <- as.numeric(yearPlaceholder)
+            yearPlaceholder <- yearPlaceholder + 1
+            yearPlaceholder <- as.character(yearPlaceholder)
+            next
+          }
         }
         else if(is.na(isolatedSheetType[3]) == TRUE){
           selectedSheet1 <- isolatedSheetType[1]
           selectedSheet2 <- isolatedSheetType[2]
+          yearPlaceholder <- isolatedDate
           
-          newFile <- getFileInfo(selectedSheet1, isolatedDate, isolatedSearchInput)
-          filesToDownload <- c(filesToDownload, newFile)
-          fileCount <- fileCount + 1
-          newFile <- getFileInfo(selectedSheet2, isolatedDate, isolatedSearchInput)
-          filesToDownload <- c(filesToDownload, newFile)
-          fileCount <- fileCount + 1
+          for(i in 1:yearCount) {
+            newFile <- getFileInfo(selectedSheet1, yearPlaceholder, isolatedSearchInput)
+            filesToDownload <- c(filesToDownload, newFile)
+            fileCount <- fileCount + 1
+            newFile <- getFileInfo(selectedSheet2, yearPlaceholder, isolatedSearchInput)
+            filesToDownload <- c(filesToDownload, newFile)
+            fileCount <- fileCount + 1
+            yearPlaceholder <- as.numeric(yearPlaceholder)
+            yearPlaceholder <- yearPlaceholder + 1
+            yearPlaceholder <- as.character(yearPlaceholder)
+            next
+          }
         }
         else{
           selectedSheet1 <- isolatedSheetType[1]
           selectedSheet2 <- isolatedSheetType[2]
           selectedSheet3 <- isolatedSheetType[3]
+          yearPlaceholder <- isolatedDate
           
-          newFile <- getFileInfo(selectedSheet1, isolatedDate, isolatedSearchInput)
-          filesToDownload <- c(filesToDownload, newFile)
-          fileCount <- fileCount + 1
-          newFile <- getFileInfo(selectedSheet2, isolatedDate, isolatedSearchInput)
-          filesToDownload <- c(filesToDownload, newFile)
-          fileCount <- fileCount + 1
-          newFile <- getFileInfo(selectedSheet3, isolatedDate, isolatedSearchInput)
-          filesToDownload <- c(filesToDownload, newFile)
-          fileCount <- fileCount + 1
+          for(i in 1:yearCount) {
+            newFile <- getFileInfo(selectedSheet1, yearPlaceholder, isolatedSearchInput)
+            filesToDownload <- c(filesToDownload, newFile)
+            fileCount <- fileCount + 1
+            newFile <- getFileInfo(selectedSheet2, yearPlaceholder, isolatedSearchInput)
+            filesToDownload <- c(filesToDownload, newFile)
+            fileCount <- fileCount + 1
+            newFile <- getFileInfo(selectedSheet3, yearPlaceholder, isolatedSearchInput)
+            filesToDownload <- c(filesToDownload, newFile)
+            fileCount <- fileCount + 1
+            yearPlaceholder <- as.numeric(yearPlaceholder)
+            yearPlaceholder <- yearPlaceholder + 1
+            yearPlaceholder <- as.character(yearPlaceholder)
+            next
+          }
         }
         
         for (i in 1:fileCount) {

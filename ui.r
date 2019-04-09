@@ -9,6 +9,10 @@ if(!require("finreportr")){
 library(shiny)
 library(finreportr)
 
+year <- format(Sys.Date(),"%Y")
+year <- as.numeric(year)
+year <- year - 9
+
 #UI
 shinyUI(fluidPage(titlePanel(h1(
   "Financial Metrics Analysis"
@@ -27,8 +31,14 @@ sidebarLayout(
     #Year selection
     selectInput(
       inputId =  "datePicker", 
-      label = "Select year:", 
-      choices = 2009:as.numeric(format(Sys.Date(),"%Y"))
+      label = "Select start year:",
+      choices = year:as.numeric(format(Sys.Date(),"%Y"))
+    ),
+    
+    selectInput(
+      inputId = "datePicker2",
+      label = "Select end year:",
+      choices = year:as.numeric(format(Sys.Date(),"%Y"))
     ),
     
     actionButton("searchBtn", "Search"),
