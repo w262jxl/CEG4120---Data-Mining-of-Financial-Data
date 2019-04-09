@@ -37,15 +37,17 @@ shinyServer(
       })
       
       output$datePickedOutput <- renderUI({
-        str1 <- "Year Selected:"
+        str1 <- "Years Selected:"
         str2 <- isolate(input$datePicker)
-        HTML(paste(str1, str2, sep=' '))
+        str3 <- isolate(input$datePicker2)
+        HTML(paste(str1,str2,str3, sep='  '))
       })
       
       output$compInfo <- renderUI({
         str <- isolate(CompanyInfo(input$searchInput))
         HTML(paste(str, sep=''))
       })
+      
       
       outputFileName <- reactive({
         isolatedSearchInput <- isolate(input$searchInput)
