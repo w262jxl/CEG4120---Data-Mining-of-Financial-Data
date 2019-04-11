@@ -25,6 +25,7 @@ shinyServer(
     #outputs
     observeEvent(input$searchBtn, {
       
+      # Function - displays the company searched
       displayCompanySearched <- function(){
         output$searchOutput <- renderUI({
           str1 <- "Company Searched:"
@@ -33,6 +34,7 @@ shinyServer(
         })
       }
       
+      # Function - displays the sheet types searched
       displaySheetTypeSelected <- function(sheet1, sheet2, sheet3){
         if(is.na(sheet2) == TRUE){
           str <- sheet1
@@ -49,6 +51,7 @@ shinyServer(
         })
       }
       
+      # Function - displays the years searched
       displayYearsSelected <- function(){
         year1 <- input$datePicker
         year2 <- input$datePicker2
@@ -66,6 +69,7 @@ shinyServer(
         })
       }
       
+      # Function - displays the company information
       displayCompanyInfo <- function(){
         output$compInfo <- renderUI({
           str <- isolate(CompanyInfo(input$searchInput))
@@ -73,11 +77,13 @@ shinyServer(
         })
       }
       
+      # Creates the file name and displays where the files are saved
       outputFileName <- reactive({
         isolatedSearchInput <- isolate(input$searchInput)
         isolatedSheetType <- isolate(input$checkboxGroup)
         isolatedDate <- isolate(input$datePicker)
         
+        # Creates the file name
         output$fileNameOutput <- renderUI({
           if(isolatedSheetType == "Balance Sheet"){
             str <- "BS"
@@ -95,6 +101,7 @@ shinyServer(
         })
       })
       
+      # Function - Prints no sheet type selected message
       noSheetSelectedMessage <- function(){
         output$searchOutput <- renderUI({
           str <- "Please select a sheet type"
@@ -102,6 +109,7 @@ shinyServer(
         })
       }
       
+      # Function - Prints no company name entered message
       noCompanyNameMessage <- function(){
         output$searchOutput <- renderUI({
           str <- "Please enter a company stock symbol"
@@ -109,6 +117,7 @@ shinyServer(
         })
       }
       
+      # Function - Prints year selected error message
       yearNotRightMessage <- function(){
         output$searchOutput <- renderUI({
           str <- "The end year must be the same or after the start year"
@@ -116,6 +125,7 @@ shinyServer(
         })
       }
       
+      # Function - Displays how many files were downloaded
       displayDownloadProgress <- function(count, fileCount){
         output$downloadProgress <- renderUI({
           count2 <- as.character(count)
@@ -125,12 +135,16 @@ shinyServer(
         })
       }
       
+      # Function - Returns file info in a form of a list
       getFileInfo <- function(form, year, company) {
         fileInfo <- c(form, year, company)
         return(fileInfo)
       }
       
+      # Function - Downloads the file
       downloadFile <- function(isolatedSheetType, isolatedDate, isolatedSearchInput) {
+        
+        # Creating the file name
         if(isolatedSheetType == "Balance Sheet"){
           str <- "BS"
         }
@@ -147,11 +161,16 @@ shinyServer(
         
         subDir <- userInput
         
+        # If file already exists, then open it
         if(file.exists(fullFileName)){
           outputFileName()
           return(fullFileName)
         }
+        
+        # If file doesn't exist, then download it
         else{
+          
+          # Call the correct function to download based off of sheet type
           if(isolatedSheetType == "Balance Sheet"){
             companyFile <- GetBalanceSheet(isolatedSearchInput, isolatedDate)
           }
@@ -162,6 +181,7 @@ shinyServer(
             companyFile <- GetCashFlow(isolatedSearchInput, isolatedDate)
           }
           
+          # If company file directory doesn't exist, create one
           if(!file.exists(subDir)){
             dir.create(subDir)
           }
@@ -173,6 +193,8 @@ shinyServer(
       }
       
       output$compForm <- renderTable({
+        
+        # Get variables
         isolatedSearchInput <- isolate(input$searchInput)
         isolatedSheetType <- isolate(input$checkboxGroup)
         isolatedDate <- isolate(input$datePicker)
@@ -186,31 +208,40 @@ shinyServer(
         yearCount <- 1
         status <- 1
         
+        # Check if years are entered correctly (end year should be same as or after start year)
         if(yearForIfCondition > yearForIfCondition2){
           status <- 0
           print("The end year must be the same or after the start year")
           yearNotRightMessage()
         }
         else{
+          
+          # Find how many years are selected
           while(year != isolatedDate2){
             yearCount <- yearCount + 1
             year <- year + 1
           }
           
+          # Check if a company name is entered
           if(isolatedSearchInput == ""){
             status <- 0
             print("No company name entered")
             noCompanyNameMessage()
           }
+          
+          # Check if a sheet type is selected
           else if(is.null(isolatedSheetType[1]) == TRUE){
             status <- 0
             print("No sheet type selected")
             noSheetSelectedMessage()
           }
+          
+          # Process if one sheet type is selected
           else if(is.na(isolatedSheetType[2]) == TRUE){
             selectedSheet1 <- isolatedSheetType[1]
             yearPlaceholder <- isolatedDate
             
+            # For loop to check which files need to be downloaded.. the loop is for the years
             for(i in 1: yearCount) {
               newFile <- getFileInfo(selectedSheet1, yearPlaceholder, isolatedSearchInput)
               filesToDownload <- c(filesToDownload, newFile)
@@ -221,11 +252,14 @@ shinyServer(
               next
             }
           }
+          
+          # Process if two sheet types are selected
           else if(is.na(isolatedSheetType[3]) == TRUE){
             selectedSheet1 <- isolatedSheetType[1]
             selectedSheet2 <- isolatedSheetType[2]
             yearPlaceholder <- isolatedDate
             
+            # For loop to check which files need to be downloaded.. the loop is for the years
             for(i in 1:yearCount) {
               newFile <- getFileInfo(selectedSheet1, yearPlaceholder, isolatedSearchInput)
               filesToDownload <- c(filesToDownload, newFile)
@@ -239,12 +273,15 @@ shinyServer(
               next
             }
           }
+          
+          # Process if all three sheet types are selected
           else{
             selectedSheet1 <- isolatedSheetType[1]
             selectedSheet2 <- isolatedSheetType[2]
             selectedSheet3 <- isolatedSheetType[3]
             yearPlaceholder <- isolatedDate
           
+            # For loop to check which files need to be downloaded.. the loop is for the years
             for(i in 1:yearCount) {
               newFile <- getFileInfo(selectedSheet1, yearPlaceholder, isolatedSearchInput)
               filesToDownload <- c(filesToDownload, newFile)
@@ -263,8 +300,9 @@ shinyServer(
           }
         }
         
+        # If status is 0, then there is some sort of input error (no company name entered, no sheet type
+        # selected, or end year is before start year), in this case, do nothing. Else display and download files
         if(status == 0){
-          
         }
         else{
           count <- 0
@@ -274,6 +312,7 @@ shinyServer(
           displayYearsSelected()
           displayCompanyInfo()
           
+          # For loop - Downloads each file that needs to be downloaded
           for (i in 1:fileCount) {
             x <- (i - 1) * 3 + 1
             print(x)
@@ -292,7 +331,6 @@ shinyServer(
           }
           
           read.csv(csvFile)
-          #downloadFile(isolatedSheetType, isolatedDate, isolatedSearchInput)
         }
       })
     })
@@ -307,6 +345,11 @@ shinyServer(
         return(NULL)
       }
       
+      # Remove display values
+      output$downloadProgress <- renderUI({
+        str <- ""
+        HTML(paste(str, sep=''))
+      })
       output$searchOutput <- renderUI({
         str <- ""
         HTML(paste(str, sep=''))

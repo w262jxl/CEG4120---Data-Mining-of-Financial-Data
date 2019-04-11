@@ -9,6 +9,7 @@ if(!require("finreportr")){
 library(shiny)
 library(finreportr)
 
+# Get the start year
 year <- format(Sys.Date(),"%Y")
 year <- as.numeric(year)
 year <- year - 9
@@ -46,14 +47,11 @@ sidebarLayout(
     fileInput( 'datafile', 'Choose CSV file',
                accept=c('text/csv', 'text/comma-separated-values,text/plain'))),
   
-  
-  
-  
-  
   #this is the area where the output will be displayed
   mainPanel(
     
     ("Search results:"),
+    htmlOutput("downloadProgress"),
     htmlOutput("searchOutput"),
     htmlOutput("sheetTypeOutput"),
     htmlOutput("datePickedOutput"),
